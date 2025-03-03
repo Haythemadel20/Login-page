@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --transition: 0.2;
+      --bg-one: hsl(280, 60%, 5%);
+      --bg-two: hsl(280, 90%, 15%);
+      --stop: 40;
+      --angle: 45;
+      --border-width: 5;
+      --padlock-size: 300;
+      --border-radius: 6;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(calc(var(--angle) * 1deg), var(--bg-one) calc(var(--stop) * 1%), var(--bg-two) calc(var(--stop) * 1%));
+    }
+
+    form {
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    label {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    input[type='password'] {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-width: calc(var(--border-width) * 1px);
+      border-style: solid;
+      border-color: hsl(0, 0%, 100%);
+      border-radius: calc(var(--border-radius) * 1px);
+      margin-bottom: 20px;
+      width: 100%;
+      outline: transparent;
+      text-align: center;
+      transition: border-color calc(var(--transition, 0.2) * 1s) ease;
+    }
+
+    input[type='password']:focus {
+      border-color: #007bff;
+    }
+
+    .login-button {
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .login-button:hover {
+      background-color: #0056b3;
+    }
+
+    .logout-message {
+      display: none;
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .padlock {
+      --hue: 65;
+      --color: hsl(50, 100%, 50%);
+      --color-one: hsl(38, 100%, 50%);
+      --color-two: hsl(0, 0%, 100%);
+      height: calc(var(--padlock-size) * 1px);
+      width: calc(var(--padlock-size) * 1px);
+      position: relative;
+      grid-row: 1;
+    }
+
+    .padlock__body {
+      border: 8px solid black;
+      border-radius: 20px;
+      position: absolute;
+      bottom: 10%;
+      width: 66%;
+      height: 46%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      background: var(--color);
+      box-shadow: -30px 0 0 0px var(--color-one) inset, 10px 0 0 0px var(--color-two) inset;
+    }
+
+    .padlock__eye {
+      position: absolute;
+      height: 15px;
+      width: 15px;
+      background: hsl(0, 0%, 0%);
+      top: 0;
+      border-radius: 50%;
+      animation: blink 4s infinite linear;
+    }
+
+    .padlock__eye::after {
+      content: '';
+      height: 25%;
+      width: 25%;
+      background: hsl(0, 0%, 100%);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-100%, -100%);
+    }
+
+    .padlock__hook {
+      width: 50%;
+      height: 90%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -40%);
+      clip-path: inset(0 0 30% 0);
+      transition: transform calc(var(--transition, 0.2) * 1s) cubic-bezier(.78, .16, .64, 1.8);
+    }
+
+    @keyframes blink {
+      0%, 24%, 27%, 100% {
+        transform: scaleY(1);
+      }
+
+      25%, 26% {
+        transform: scaleY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <label for="password">Password</label>
+    <input id="password" type="password" pattern="pass2005" placeholder="Enter your password" required title="Try this password 'pass2005'? 🤫">
+    <button type="submit" class="login-button">Login</button>
+  </form>
+
+  <script>
+    // JavaScript to handle login and redirection
+    function handleLogin(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the password input value
+      const passwordInput = document.getElementById('password');
+      const logoutMessage = document.getElementById('logoutMessage');
+
+      // Check if the password matches (you can update this check to your requirement)
+      if (passwordInput.value === 'pass2005') {
+        // If password is correct, redirect to the given URL
+        window.location.href = 'https://haythemadel20.github.io/Adel-secondWeb/';
+      } else {
+        // If password is incorrect, show the error message
+        logoutMessage.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
